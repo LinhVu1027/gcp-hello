@@ -50,10 +50,10 @@ on:
       - main
 
 env:
-  PROJECT_ID: cf-vvv-barcode-gener-0a
-  GAR_LOCATION: europe-west3 # Artifact Registry location
-  SERVICE: vvv-linhvu # CloudRun name
-  REGION: europe-west3 # CloudRun region
+  PROJECT_ID: linhvu-hello-gcp
+  GAR_LOCATION: asia-southeast1 # Artifact Registry location
+  SERVICE: gcp-hello # CloudRun name
+  REGION: asia-southeast1 # CloudRun region
 
 jobs:
   deploy:
