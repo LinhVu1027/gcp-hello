@@ -1,5 +1,10 @@
 1. CI/CD Workflow using Github action to deploy to CloudRun 
 
+Enable Cloud Run
+gcloud services enable run.googleapis.com
+Enable Artifact Registry
+gcloud services enable artifactregistry.googleapis.com
+
 [Setting up Workload Identity Federation](https://github.com/google-github-actions/auth#setting-up-workload-identity-federation)
 1. ```
    export PROJECT_ID="my-project"
