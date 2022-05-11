@@ -106,10 +106,9 @@ jobs:
 
       - name: Build and Push Container
         run: |-
-          ./gradlew bootBuildImage --imageName="${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.SERVICE }}:${{ github.sha }}"/
+          docker build --build-arg JAR_FILE=build/libs/\*.jar -t "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.SERVICE }}:${{ github.sha }}" ./
           docker push "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.SERVICE }}:${{ github.sha }}"
 
-      # docker build -t "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.SERVICE }}:${{ github.sha }}" ./
       # END - Docker auth and build
 
       - name: Deploy to Cloud Run
