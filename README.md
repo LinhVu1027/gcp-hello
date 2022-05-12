@@ -57,3 +57,55 @@ gcloud services enable artifactregistry.googleapis.com
    --workload-identity-pool="${POOL_ID}" \
    --format="value(name)"
    ```
+
+[Setting up External HTTP Load Balancer]
+1. Load balancers use a serverless Network Endpoint Group (NEG) backend to direct requests to a serverless Cloud Run service.
+   ```
+   gcloud compute network-endpoint-groups create gcp-hello-neg \
+    --region=asia-southeast1 \
+    --network-endpoint-type=serverless  \
+    --cloud-run-service=gcp-hello
+   ```
+2. Create a backend service.
+   ```
+   gcloud compute backend-services create gcp-hello-backendservice \
+    --global
+   ```
+3. Add the serverless NEG as a backend to this backend service.
+   ```
+   gcloud compute backend-services add-backend gcp-hello-backendservice \
+    --global \
+    --network-endpoint-group=gcp-hello-neg \
+    --network-endpoint-group-region=asia-southeast1
+   ```
+4. Create a URL map to route incoming requests to the backend service (this is a load-balancer in Google Console).
+   ```
+   gcloud compute url-maps create simple-lb-urlmap \
+    --default-service gcp-hello-backendservice
+   ```
+5. Create a target HTTP(S) proxy to route requests to your URL map.
+   ```
+   gcloud compute target-http-proxies create simple-lb-targetproxy \
+    --url-map=simple-lb-urlmap
+   ```
+6. Create a global forwarding rule to route incoming requests to the proxy.
+   ```
+   gcloud compute forwarding-rules create simple-lb-forwardingrule \
+    --address=static-ip \
+    --target-http-proxy=simple-lb-targetproxy \
+    --global \
+    --ports=80
+   ```
+   ```
+   gcloud compute forwarding-rules create simple-lb-forwardingrule \
+    --target-http-proxy=simple-lb-targetproxy \
+    --global \
+    --ports=80
+   ```
+Overral flow: 
+simple-lb-forwardingrule(ephemeral-ip:80) 
+-> simple-lb-targetproxy 
+-> simple-lb-urlmap (loadbalancer, route request based on host/path)
+-> gcp-hello-backendservice
+-> gcp-hello-neg (Network Endpoint Group)
+-> gcp-hello (Cloud Run)
