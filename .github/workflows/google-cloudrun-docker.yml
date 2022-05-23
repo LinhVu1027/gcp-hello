@@ -126,11 +126,17 @@ jobs:
 #          env_vars: 'NAME="Hello World"'
         run: |-
           gcloud run deploy ${{ env.SERVICE }} \
+            --quiet \
             --region ${{ env.REGION }} \
             --image ${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.SERVICE }}:${{ github.sha }} \
             --platform managed \
             --set-env-vars NAME="Hello GCP" \
-            --allow-unauthenticated
+            --allow-unauthenticated \
+            --memory 256Mi \
+            --timeout 300 \
+            --concurrency 80 \
+            --max-instances 1000 \
+            --cpu 1 
 
       # If required, use the Cloud Run url output in later steps
       - name: Show Output
