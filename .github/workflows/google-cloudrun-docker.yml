@@ -77,7 +77,7 @@ jobs:
           cache: 'gradle'
 
       - name: Build with Gradle
-        run: ./gradlew build --no-daemon
+        run: ./gradlew bootJar --no-daemon
 
 #     https://github.com/google-github-actions/auth
       - name: Google Auth
