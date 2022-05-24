@@ -132,10 +132,10 @@ jobs:
             --platform managed \
             --set-env-vars NAME="Hello GCP" \
             --allow-unauthenticated \
-            --memory 256Mi \
+            --memory 512Mi \
             --timeout 300 \
             --concurrency 80 \
-            --max-instances 1000 \
+            --max-instances 100 \
             --cpu 1 
 
       # If required, use the Cloud Run url output in later steps
