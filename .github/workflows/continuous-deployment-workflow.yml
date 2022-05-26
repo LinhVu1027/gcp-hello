@@ -26,6 +26,10 @@ jobs:
   deploy_dev:
     name: Deploy to DEV GCP
     needs: [build]
+    # Add 'id-token' with the intended permissions for workload identity federation
+    permissions:
+      contents: 'read'
+      id-token: 'write'
     runs-on: ubuntu-latest
     env:
       PROJECT_ID: linhvu-hello-gcp
