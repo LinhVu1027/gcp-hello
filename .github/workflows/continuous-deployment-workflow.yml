@@ -26,6 +26,10 @@ jobs:
   deploy_dev:
     name: Deploy / Dev GCP
     needs: [ build ]
+    # Add 'id-token' with the intended permissions for workload identity federation
+    permissions:
+      contents: 'read'
+      id-token: 'write'
     uses: ./.github/workflows/cloudrun-deploy-reusable-workflow.yml
     with:
       ENVIRONMENT: Dev
@@ -41,6 +45,10 @@ jobs:
   deploy_staging:
     name: Deploy / Staging GCP
     needs: [ build ]
+    # Add 'id-token' with the intended permissions for workload identity federation
+    permissions:
+      contents: 'read'
+      id-token: 'write'
     uses: ./.github/workflows/cloudrun-deploy-reusable-workflow.yml
     with:
       ENVIRONMENT: Staging
@@ -56,6 +64,10 @@ jobs:
   deploy_preprod:
     name: Deploy / PreProd GCP
     needs: [ deploy_staging ]
+    # Add 'id-token' with the intended permissions for workload identity federation
+    permissions:
+      contents: 'read'
+      id-token: 'write'
     uses: ./.github/workflows/cloudrun-deploy-reusable-workflow.yml
     with:
       ENVIRONMENT: PreProd
