@@ -6,6 +6,11 @@ on:
 #      - main
   workflow_dispatch:
 
+# Add 'id-token' with the intended permissions for workload identity federation
+permissions:
+  contents: 'read'
+  id-token: 'write'
+
 jobs:
   build:
     name: Build with Gradle and JDK 17
@@ -24,12 +29,8 @@ jobs:
         run: ./gradlew clean build
 
   deploy_dev:
-    name: Deploy / Dev GCP
+    name: Dev GCP
     needs: [ build ]
-    # Add 'id-token' with the intended permissions for workload identity federation
-    permissions:
-      contents: 'read'
-      id-token: 'write'
     uses: ./.github/workflows/cloudrun-deploy-reusable-workflow.yml
     with:
       ENVIRONMENT: Dev
@@ -43,12 +44,8 @@ jobs:
       WIF_SERVICE_ACCOUNT: ${{ secrets.WIF_SERVICE_ACCOUNT }}
 
   deploy_staging:
-    name: Deploy / Staging GCP
+    name: Staging GCP
     needs: [ build ]
-    # Add 'id-token' with the intended permissions for workload identity federation
-    permissions:
-      contents: 'read'
-      id-token: 'write'
     uses: ./.github/workflows/cloudrun-deploy-reusable-workflow.yml
     with:
       ENVIRONMENT: Staging
@@ -62,12 +59,8 @@ jobs:
       WIF_SERVICE_ACCOUNT: ${{ secrets.WIF_SERVICE_ACCOUNT }}
 
   deploy_preprod:
-    name: Deploy / PreProd GCP
+    name: PreProd GCP
     needs: [ deploy_staging ]
-    # Add 'id-token' with the intended permissions for workload identity federation
-    permissions:
-      contents: 'read'
-      id-token: 'write'
     uses: ./.github/workflows/cloudrun-deploy-reusable-workflow.yml
     with:
       ENVIRONMENT: PreProd
