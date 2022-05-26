@@ -1,0 +1,31 @@
+name: PR build
+
+on:
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        jdk: [17]
+      fail-fast: false
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up JDK ${{ matrix.jdk }}
+        uses: actions/setup-java@v3
+        with:
+          java-version: ${{ matrix.jdk }}
+
+      - name: Build with Gradle
+        run: ./gradlew clean build
