@@ -26,7 +26,7 @@ jobs:
   deploy_dev:
     name: Deploy / Dev GCP
     needs: [ build ]
-    uses: ./.github/workflows/cloudrun-deploy-reusable-workflow
+    uses: ./.github/workflows/cloudrun-deploy-reusable-workflow.yml
     with:
       ENVIRONMENT: Dev
       PROJECT_ID: linhvu-hello-gcp
@@ -41,7 +41,7 @@ jobs:
   deploy_staging:
     name: Deploy / Staging GCP
     needs: [ build ]
-    uses: ./.github/workflows/cloudrun-deploy-reusable-workflow
+    uses: ./.github/workflows/cloudrun-deploy-reusable-workflow.yml
     with:
       ENVIRONMENT: Staging
       PROJECT_ID: linhvu-hello-gcp
@@ -56,7 +56,7 @@ jobs:
   deploy_preprod:
     name: Deploy / PreProd GCP
     needs: [ deploy_staging ]
-    uses: ./.github/workflows/cloudrun-deploy-reusable-workflow
+    uses: ./.github/workflows/cloudrun-deploy-reusable-workflow.yml
     with:
       ENVIRONMENT: PreProd
       PROJECT_ID: linhvu-hello-gcp
