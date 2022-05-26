@@ -12,7 +12,7 @@ jobs:
 
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest]
+        os: [ubuntu-latest]
         jdk: [17]
       fail-fast: false
 
@@ -26,6 +26,13 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: ${{ matrix.jdk }}
+
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+        with:
+          cache-read-only: true
+        env:
+          GRADLE_USER_HOME: ~/.gradle
 
       - name: Build with Gradle
         run: ./gradlew clean build
