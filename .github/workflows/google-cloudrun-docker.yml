@@ -120,7 +120,7 @@ jobs:
             --memory 512Mi \
             --timeout 300 \
             --concurrency 80 \
-            --max-instances 100 \
+            --max-instances 10 \
             --cpu 1 
 
       # If required, use the Cloud Run url output in later steps
