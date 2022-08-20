@@ -51,7 +51,7 @@ on:
   workflow_dispatch:
 
 env:
-  PROJECT_ID: linhvu-hello-gcp
+  PROJECT_ID: linhvu-hello-gcp-360004
   GAR_LOCATION: asia-east1 # Artifact Registry location
   REPOSITORY: gcp-hello-repository
   SERVICE: gcp-hello # CloudRun name
