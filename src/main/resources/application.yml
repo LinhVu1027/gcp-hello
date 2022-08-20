@@ -13,8 +13,10 @@ spring:
       maximum-pool-size: 10
       data-source-properties:
         socketFactory: com.google.cloud.sql.postgres.SocketFactory
-        cloudSqlInstance: linhvu-hello-gcp:asia-southeast1:gcp-hello-db
+        cloudSqlInstance: linhvu-hello-gcp-360004:asia-east1:gcp-hello-db
         ipTypes: PUBLIC,PRIVATE
+
+
   jpa:
     generate-ddl: true
     show-sql: true

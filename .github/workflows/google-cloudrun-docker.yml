@@ -52,10 +52,10 @@ on:
 
 env:
   PROJECT_ID: linhvu-hello-gcp
-  GAR_LOCATION: asia-southeast1 # Artifact Registry location
+  GAR_LOCATION: asia-east1 # Artifact Registry location
   REPOSITORY: gcp-hello-repository
   SERVICE: gcp-hello # CloudRun name
-  REGION: asia-southeast1 # CloudRun region
+  REGION: asia-east1 # CloudRun region
 
 jobs:
   deploy:

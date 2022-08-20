@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @RestController
-@RequestMapping
+@RequestMapping(value = "/hello")
 @RequiredArgsConstructor
 public class HelloController {
 
