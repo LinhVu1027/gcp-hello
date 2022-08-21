@@ -5,16 +5,15 @@ server:
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql:///postgres
-    username: postgres
-    password: postgres
+    url: jdbc:postgresql:///${DB_DATABASE:postgres1}
+    username: ${DB_USERNAME:postgres1}
+    password: ${DB_PASSWORD:postgres1}
     hikari:
       minimum-idle: 5
       maximum-pool-size: 10
       data-source-properties:
         socketFactory: com.google.cloud.sql.postgres.SocketFactory
-        cloudSqlInstance: linhvu-hello-gcp-360004:asia-east1:gcp-hello-db
-        ipTypes: PUBLIC,PRIVATE
+        cloudSqlInstance: ${DB_CLOUD_SQL_INSTANCE:linhvu-hello-gcp-360004:asia-east1:gcp-hello-db}
 
 
   jpa:
@@ -26,5 +25,5 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQL10Dialect
         format_sql: true
-        generate_statistics: true
-        session.events.log.LOG_QUERIES_SLOWER_THAN_MS: 1
+#        generate_statistics: true
+#        session.events.log.LOG_QUERIES_SLOWER_THAN_MS: 1
