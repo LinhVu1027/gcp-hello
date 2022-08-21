@@ -117,10 +117,10 @@ jobs:
             --platform managed \
             --set-env-vars NAME="Hello GCP" \
       
-            --update-secrets DB_DATABASE=DB_DATABASE:latest \
-            --update-secrets DB_USERNAME=DB_USERNAME:latest \
-            --update-secrets DB_PASSWORD=DB_PASSWORD:latest \
-            --update-secrets DB_CLOUD_SQL_INSTANCE=DB_CLOUD_SQL_INSTANCE:latest \
+            --set-secrets DB_DATABASE=DB_DATABASE:latest \
+            --set-secrets DB_USERNAME=DB_USERNAME:latest \
+            --set-secrets DB_PASSWORD=DB_PASSWORD:latest \
+            --set-secrets DB_CLOUD_SQL_INSTANCE=DB_CLOUD_SQL_INSTANCE:latest \
           
             --allow-unauthenticated \
             --memory 512Mi \
