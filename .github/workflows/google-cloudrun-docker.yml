@@ -115,11 +115,11 @@ jobs:
             --region ${{ env.REGION }} \
             --image ${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.SERVICE }}:${{ github.sha }} \
             --platform managed \
-            --update-env-vars NAME="Hello GCP" \
-            --update-env-vars DB_DATABASE=DB_DATABASE:latest \
-            --update-env-vars DB_USERNAME=DB_USERNAME:latest \
-            --update-env-vars DB_PASSWORD=DB_PASSWORD:latest \
-            --update-env-vars DB_CLOUD_SQL_INSTANCE=DB_CLOUD_SQL_INSTANCE:latest \
+            --set-env-vars NAME="Hello GCP" \
+            --set-secrets DB_DATABASE=DB_DATABASE:latest \
+            --set-secrets DB_USERNAME=DB_USERNAME:latest \
+            --set-secrets DB_PASSWORD=DB_PASSWORD:latest \
+            --set-secrets DB_CLOUD_SQL_INSTANCE=DB_CLOUD_SQL_INSTANCE:latest \
             --allow-unauthenticated \
             --memory 512Mi \
             --timeout 300 \
